@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #fce4ec; /* Pink background */
+      margin: 0;
+      overflow: hidden; /* Hide overflow to prevent scroll bars */
+    }
+
+    #question {
+      font-size: 24px;
+      color: pink;
+      margin-bottom: 20px;
+    }
+
+    #heart-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .heart {
+      font-size: 40px; /* Larger heart size */
+      position: absolute;
+      animation: fall 4s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(150vh); /* Increased falling distance */
+      }
+    }
+
+    #love-message {
+      font-size: 40px;
+      color: pink;
+      display: none;
+    }
+
+    #yes-button {
+      font-size: 20px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div id="question">Will you be my Valentine?</div>
+<button id="yes-button" onclick="handleYes()">Yes</button>
+<div id="love-message"></div>
+
+<div id="heart-container"></div>
+
+<script>
+  function handleYes() {
+    // Make the "Yes" button invisible
+    document.getElementById("yes-button").style.display = "none";
+
+    // Display "I LOVE YOU" message
+    document.getElementById("love-message").innerHTML = "I LOVE YOU";
+    document.getElementById("love-message").style.display = "block";
+
+    // Create 50 larger heart symbols spread across the entire screen
+    for (let i = 0; i < 50; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️"; // Heart symbol
+
+      // Set random position for each heart
+      const randomX = Math.random() * (window.innerWidth - 40); // Subtract 40 for heart size
+      const randomY = Math.random() * window.innerHeight;
+      heart.style.left = `${randomX}px`;
+      heart.style.top = `${randomY}px`;
+
+      // Append the heart to the container
+      document.getElementById("heart-container").appendChild(heart);
+    }
+  }
+</script>
+</body>
+</html>
